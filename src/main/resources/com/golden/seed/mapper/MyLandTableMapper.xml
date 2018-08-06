@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.golden.seed.dao.MyLandTableMapper">
+  <resultMap id="BaseResultMap" type="com.golden.seed.pojo.LandTable">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="farmer_id" jdbcType="VARCHAR" property="farmerId" />
+    <result column="land_address" jdbcType="VARCHAR" property="landAddress" />
+    <result column="land_id" jdbcType="VARCHAR" property="landId" />
+  </resultMap>
+  
+ 
+  <sql id="Base_Column_List">
+    id, farmer_id, land_address, land_id
+  </sql>
+  <select id="selectByFarmerId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from land_table
+    where farmer_id = #{farmerId,jdbcType=VARCHAR}
+  </select>
+</mapper>

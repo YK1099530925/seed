@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+  	<commentGenerator>
+  		<property name="suppressAllComments" value="true"/>
+  	</commentGenerator>
+  	<!-- 配置数据库连接信息 -->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://localhost:3306/seed"
+        userId="root"
+        password="12345678">
+    </jdbcConnection>
+
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+	
+	<!-- 指定javaBean生成的位置 -->
+    <javaModelGenerator targetPackage="com.golden.seed.pojo" 
+    	targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+	
+	<!-- 指定SQL映射文件生成的位置 -->
+    <sqlMapGenerator targetPackage="com.golden.seed.mapper" 
+    	 targetProject=".\src\main\resources">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+	<!-- 指定dao接口生成的位置 mapper接口 -->
+    <javaClientGenerator type="XMLMAPPER" 
+    	targetPackage="com.golden.seed.dao"  
+    	targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+    
+    <table tableName="eventtype_table" domainObjectName="EventTypeTable"></table> 
+	
+	<!-- <table tableName="event_table" domainObjectName="EventTable"></table>  -->
+	<!--table指定每个表的生成策略 -->
+	<!-- <table tableName="conpany_table" domainObjectName="CompanyTable"></table>
+	<table tableName="farmer_table" domainObjectName="FarmerTable"></table> 
+	<table tableName="land_table" domainObjectName="LandTable"></table>
+	<table tableName="seed_table" domainObjectName="SeedTable"></table> -->
+	
+	
+	
+	
+  </context>
+</generatorConfiguration>

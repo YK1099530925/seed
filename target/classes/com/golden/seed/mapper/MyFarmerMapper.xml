@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.golden.seed.dao.MyFarmerMapper">
+  <resultMap id="BaseResultMap" type="com.golden.seed.pojo.FarmerTable">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="farmers_address" jdbcType="VARCHAR" property="farmersAddress" />
+    <result column="farmers_id" jdbcType="VARCHAR" property="farmersId" />
+    <result column="farmers_name" jdbcType="VARCHAR" property="farmersName" />
+    <result column="farmers_sex" jdbcType="VARCHAR" property="farmersSex" />
+    <result column="farmers_telephone" jdbcType="VARCHAR" property="farmersTelephone" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+  
+ 
+  <sql id="Base_Column_List">
+    id, farmers_address, farmers_id, farmers_name, farmers_sex, farmers_telephone, password
+  </sql>
+  
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from farmer_table
+    where farmers_name = #{farmersName }
+  </select>
+  
+  <select id="getfarmerInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from farmer_table
+    where farmers_id = #{farmersId }
+  </select>
+  
+  <select id="passwordIsTrue" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from farmer_table
+    where farmers_id = #{farmersId } and password = #{password }
+  </select>
+  
+  <select id="getFarmerAllInfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from farmer_table
+  </select>
+  
+</mapper>

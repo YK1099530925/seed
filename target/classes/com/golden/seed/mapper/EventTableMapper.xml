@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.golden.seed.dao.EventTableMapper">
+  <resultMap id="BaseResultMap" type="com.golden.seed.pojo.EventTable">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="event_article_type" jdbcType="VARCHAR" property="eventArticleType" />
+    <result column="event_article_use" jdbcType="VARCHAR" property="eventArticleUse" />
+    <result column="event_happen_addr" jdbcType="VARCHAR" property="eventHappenAddr" />
+    <result column="event_happen_time" jdbcType="TIMESTAMP" property="eventHappenTime" />
+    <result column="event_recorder" jdbcType="VARCHAR" property="eventRecorder" />
+    <result column="event_recorder_company" jdbcType="VARCHAR" property="eventRecorderCompany" />
+    <result column="event_relevant_personnel" jdbcType="VARCHAR" property="eventRelevantPersonnel" />
+    <result column="event_type" jdbcType="VARCHAR" property="eventType" />
+    <result column="farmers_id" jdbcType="VARCHAR" property="farmersId" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="seed_code" jdbcType="VARCHAR" property="seedCode" />
+    <result column="event_info" jdbcType="VARCHAR" property="eventInfo" />
+    <result column="event_time" jdbcType="TIMESTAMP" property="eventTime" />
+    <result column="land_id" jdbcType="VARCHAR" property="landId" />
+    <result column="seed_name" jdbcType="VARCHAR" property="seedName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, event_article_type, event_article_use, event_happen_addr, event_happen_time, 
+    event_recorder, event_recorder_company, event_relevant_personnel, event_type, farmers_id, 
+    remarks, seed_code, event_info, event_time, land_id, seed_name
+  </sql>
+  <select id="selectByExample" parameterType="com.golden.seed.pojo.EventTableExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from event_table
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from event_table
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from event_table
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.golden.seed.pojo.EventTableExample">
+    delete from event_table
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.golden.seed.pojo.EventTable">
+    insert into event_table (id, event_article_type, event_article_use, 
+      event_happen_addr, event_happen_time, event_recorder, 
+      event_recorder_company, event_relevant_personnel, 
+      event_type, farmers_id, remarks, 
+      seed_code, event_info, event_time, 
+      land_id, seed_name)
+    values (#{id,jdbcType=INTEGER}, #{eventArticleType,jdbcType=VARCHAR}, #{eventArticleUse,jdbcType=VARCHAR}, 
+      #{eventHappenAddr,jdbcType=VARCHAR}, #{eventHappenTime,jdbcType=TIMESTAMP}, #{eventRecorder,jdbcType=VARCHAR}, 
+      #{eventRecorderCompany,jdbcType=VARCHAR}, #{eventRelevantPersonnel,jdbcType=VARCHAR}, 
+      #{eventType,jdbcType=VARCHAR}, #{farmersId,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{seedCode,jdbcType=VARCHAR}, #{eventInfo,jdbcType=VARCHAR}, #{eventTime,jdbcType=TIMESTAMP}, 
+      #{landId,jdbcType=VARCHAR}, #{seedName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.golden.seed.pojo.EventTable">
+    insert into event_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="eventArticleType != null">
+        event_article_type,
+      </if>
+      <if test="eventArticleUse != null">
+        event_article_use,
+      </if>
+      <if test="eventHappenAddr != null">
+        event_happen_addr,
+      </if>
+      <if test="eventHappenTime != null">
+        event_happen_time,
+      </if>
+      <if test="eventRecorder != null">
+        event_recorder,
+      </if>
+      <if test="eventRecorderCompany != null">
+        event_recorder_company,
+      </if>
+      <if test="eventRelevantPersonnel != null">
+        event_relevant_personnel,
+      </if>
+      <if test="eventType != null">
+        event_type,
+      </if>
+      <if test="farmersId != null">
+        farmers_id,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="seedCode != null">
+        seed_code,
+      </if>
+      <if test="eventInfo != null">
+        event_info,
+      </if>
+      <if test="eventTime != null">
+        event_time,
+      </if>
+      <if test="landId != null">
+        land_id,
+      </if>
+      <if test="seedName != null">
+        seed_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="eventArticleType != null">
+        #{eventArticleType,jdbcType=VARCHAR},
+      </if>
+      <if test="eventArticleUse != null">
+        #{eventArticleUse,jdbcType=VARCHAR},
+      </if>
+      <if test="eventHappenAddr != null">
+        #{eventHappenAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="eventHappenTime != null">
+        #{eventHappenTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eventRecorder != null">
+        #{eventRecorder,jdbcType=VARCHAR},
+      </if>
+      <if test="eventRecorderCompany != null">
+        #{eventRecorderCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="eventRelevantPersonnel != null">
+        #{eventRelevantPersonnel,jdbcType=VARCHAR},
+      </if>
+      <if test="eventType != null">
+        #{eventType,jdbcType=VARCHAR},
+      </if>
+      <if test="farmersId != null">
+        #{farmersId,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="seedCode != null">
+        #{seedCode,jdbcType=VARCHAR},
+      </if>
+      <if test="eventInfo != null">
+        #{eventInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="eventTime != null">
+        #{eventTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="landId != null">
+        #{landId,jdbcType=VARCHAR},
+      </if>
+      <if test="seedName != null">
+        #{seedName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.golden.seed.pojo.EventTableExample" resultType="java.lang.Long">
+    select count(*) from event_table
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update event_table
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.eventArticleType != null">
+        event_article_type = #{record.eventArticleType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eventArticleUse != null">
+        event_article_use = #{record.eventArticleUse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eventHappenAddr != null">
+        event_happen_addr = #{record.eventHappenAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eventHappenTime != null">
+        event_happen_time = #{record.eventHappenTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.eventRecorder != null">
+        event_recorder = #{record.eventRecorder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eventRecorderCompany != null">
+        event_recorder_company = #{record.eventRecorderCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eventRelevantPersonnel != null">
+        event_relevant_personnel = #{record.eventRelevantPersonnel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eventType != null">
+        event_type = #{record.eventType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.farmersId != null">
+        farmers_id = #{record.farmersId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seedCode != null">
+        seed_code = #{record.seedCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eventInfo != null">
+        event_info = #{record.eventInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eventTime != null">
+        event_time = #{record.eventTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.landId != null">
+        land_id = #{record.landId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seedName != null">
+        seed_name = #{record.seedName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update event_table
+    set id = #{record.id,jdbcType=INTEGER},
+      event_article_type = #{record.eventArticleType,jdbcType=VARCHAR},
+      event_article_use = #{record.eventArticleUse,jdbcType=VARCHAR},
+      event_happen_addr = #{record.eventHappenAddr,jdbcType=VARCHAR},
+      event_happen_time = #{record.eventHappenTime,jdbcType=TIMESTAMP},
+      event_recorder = #{record.eventRecorder,jdbcType=VARCHAR},
+      event_recorder_company = #{record.eventRecorderCompany,jdbcType=VARCHAR},
+      event_relevant_personnel = #{record.eventRelevantPersonnel,jdbcType=VARCHAR},
+      event_type = #{record.eventType,jdbcType=VARCHAR},
+      farmers_id = #{record.farmersId,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      seed_code = #{record.seedCode,jdbcType=VARCHAR},
+      event_info = #{record.eventInfo,jdbcType=VARCHAR},
+      event_time = #{record.eventTime,jdbcType=TIMESTAMP},
+      land_id = #{record.landId,jdbcType=VARCHAR},
+      seed_name = #{record.seedName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.golden.seed.pojo.EventTable">
+    update event_table
+    <set>
+      <if test="eventArticleType != null">
+        event_article_type = #{eventArticleType,jdbcType=VARCHAR},
+      </if>
+      <if test="eventArticleUse != null">
+        event_article_use = #{eventArticleUse,jdbcType=VARCHAR},
+      </if>
+      <if test="eventHappenAddr != null">
+        event_happen_addr = #{eventHappenAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="eventHappenTime != null">
+        event_happen_time = #{eventHappenTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eventRecorder != null">
+        event_recorder = #{eventRecorder,jdbcType=VARCHAR},
+      </if>
+      <if test="eventRecorderCompany != null">
+        event_recorder_company = #{eventRecorderCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="eventRelevantPersonnel != null">
+        event_relevant_personnel = #{eventRelevantPersonnel,jdbcType=VARCHAR},
+      </if>
+      <if test="eventType != null">
+        event_type = #{eventType,jdbcType=VARCHAR},
+      </if>
+      <if test="farmersId != null">
+        farmers_id = #{farmersId,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="seedCode != null">
+        seed_code = #{seedCode,jdbcType=VARCHAR},
+      </if>
+      <if test="eventInfo != null">
+        event_info = #{eventInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="eventTime != null">
+        event_time = #{eventTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="landId != null">
+        land_id = #{landId,jdbcType=VARCHAR},
+      </if>
+      <if test="seedName != null">
+        seed_name = #{seedName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.golden.seed.pojo.EventTable">
+    update event_table
+    set event_article_type = #{eventArticleType,jdbcType=VARCHAR},
+      event_article_use = #{eventArticleUse,jdbcType=VARCHAR},
+      event_happen_addr = #{eventHappenAddr,jdbcType=VARCHAR},
+      event_happen_time = #{eventHappenTime,jdbcType=TIMESTAMP},
+      event_recorder = #{eventRecorder,jdbcType=VARCHAR},
+      event_recorder_company = #{eventRecorderCompany,jdbcType=VARCHAR},
+      event_relevant_personnel = #{eventRelevantPersonnel,jdbcType=VARCHAR},
+      event_type = #{eventType,jdbcType=VARCHAR},
+      farmers_id = #{farmersId,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      seed_code = #{seedCode,jdbcType=VARCHAR},
+      event_info = #{eventInfo,jdbcType=VARCHAR},
+      event_time = #{eventTime,jdbcType=TIMESTAMP},
+      land_id = #{landId,jdbcType=VARCHAR},
+      seed_name = #{seedName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

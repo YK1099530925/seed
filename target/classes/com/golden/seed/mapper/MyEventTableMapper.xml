@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.golden.seed.dao.MyEventTableMapper">
+  <resultMap id="BaseResultMap" type="com.golden.seed.pojo.EventTable">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="farmers_id" jdbcType="VARCHAR" property="farmersId" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="seed_code" jdbcType="VARCHAR" property="seedCode" />
+    <result column="event_info" jdbcType="VARCHAR" property="eventInfo" />
+    <result column="event_time" jdbcType="TIMESTAMP" property="eventTime" />
+    <result column="land_id" jdbcType="VARCHAR" property="landId" />
+    <result column="seed_name" jdbcType="VARCHAR" property="seedName" />
+    <result column="event_type" jdbcType="VARCHAR" property="eventType" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, farmers_id, remarks, seed_code, event_info, event_time, land_id, seed_name, event_type
+  </sql>
+  
+  <select id="getSeedInfoByLandId" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from event_table
+    where land_id = #{landId } and farmers_id = #{farmerId } LIMIT 1
+  </select>
+  
+  <select id="getseedGrowInfoByFarmerIdAndSeedName" parameterType="map" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from event_table
+    where farmers_id = #{farmerId } And seed_name = #{seedName }
+  </select>
+  
+  <update id="updateLandId" parameterType="map">
+  	update event_table
+  	<set>
+  		land_id = '0'
+  	</set>
+  	where farmers_id = #{farmersId} and seed_name = #{seedName} and land_id = #{landId}
+  </update>
+  
+</mapper>

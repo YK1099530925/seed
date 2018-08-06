@@ -1,0 +1,15 @@
+.red{
+	color: red;
+}
+
+.green{
+	color: green;
+}
+
+.borderColorRed{
+	border-color: red;
+}
+
+.borderColorGreen{
+	border-color: green;
+}
